@@ -1,4 +1,4 @@
-import UmNoteTemplate from './template/note/index.vue'
+import DocNoteTemplate from './template/note/index.vue'
 import { _languageMap, getLanguage, UM_NOTE_CONFIG } from './template/note/publicData'
 import components from 'prismjs/components.js'
 import loadLanguages from './template/note/modified-prism.js'
@@ -30,15 +30,15 @@ window.Prism.hasLanguage = (language) => {
   return fullMap[language.toLowerCase()] === undefined ? false : true
 }
 
-if (window.Vue) window.Vue.component('UmNote', UmNoteTemplate)
+if (window.Vue) window.Vue.component('DocNote', DocNoteTemplate)
 
-export const UmNote = {
+export const DocNote = {
   install: function (Vue) {
-    Vue.component('UmNote', UmNoteTemplate)
+    Vue.component('DocNote', DocNoteTemplate)
   }
 }
 
-export const UmNoteConfig = (json = {}) => {
+export const DocNoteConfig = (json = {}) => {
   if (json.addConfigure) UM_NOTE_CONFIG.addConfigure = json.addConfigure
   if (json.editConfigure) UM_NOTE_CONFIG.editConfigure = json.editConfigure
   if (json.removeConfigure) UM_NOTE_CONFIG.removeConfigure = json.removeConfigure

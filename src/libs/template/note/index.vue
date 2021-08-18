@@ -5,14 +5,14 @@
     >
       <div class="_um-_unfold-box"
         v-if="foldable || foldable === ''"
-        :style="{ width: showing ? 'calc(100% - 55px)' : 'calc(100% - 30px)' }"
+        :style="{ width: showing ? 'calc(100% - 42px)' : 'calc(100% - 27px)' }"
         @click="toFoldOrUnfold"
       >
         <div class="_um-_unfold-text"
-          :style="{ left: showing ? '20px' : '0', color: unfoldColor }"
-        >{{ showing ? 'fold' : 'unfold note' }}</div>
+          :style="{ left: showing ? '16px' : '0', color: unfoldColor }"
+        ><div class="_um-_unfold-scale-text">{{ showing ? 'fold' : 'unfold note' }}</div></div>
         <div class="_um-_unflod-arrow"
-          :style="{ left: showing ? '0' : '57px', color: arrowColor }"
+          :style="{ left: showing ? '0' : '55px', color: arrowColor }"
         >{{ showing ? '‹‹‹' : '›››' }}</div>
       </div>
       <div
@@ -198,7 +198,7 @@ export default {
     }
   },
   watch: {
-    show(bl) {
+    showing(bl) {
       this.headBoxStyle = { background: bl ? 'transparent' : themesData.head_background_hidden }
     },
     codes: {

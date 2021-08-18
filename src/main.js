@@ -4,7 +4,8 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-import { UmNote, UmNoteConfig } from '@/libs'
+import { DocNote, DocNoteConfig } from '@/libs' // 开发调试
+// import { DocNote, DocNoteConfig } from 'doc-note'
 
 /**
  * 所有被支持的语言
@@ -34,7 +35,7 @@ console.log(Prism.hasLanguage('html'))
  * 
  * @param {Object}
  */
-UmNoteConfig({
+DocNoteConfig({
   /**
    * 权限配置-使页面可被编辑
    * 
@@ -113,7 +114,7 @@ UmNoteConfig({
   theme: 'default',
 })
 
-Vue.use(UmNote)
+Vue.use(DocNote)
 
 new Vue({
   store,

@@ -2,7 +2,7 @@
   <div id="app">
     <button class="btn1" @click="toLogin">Log In</button>
     <button class="btn2" @click="toLogout">Log Out</button><br>
-    <um-note
+    <doc-note
       class="code-outsize1"
       :width="width"
       height="300px"
@@ -13,7 +13,7 @@
       :codes="code1"
       @submit="submit1"
     />
-    <um-note
+    <doc-note
       class="code-outsize2"
       :width="width"
       language="javascript"

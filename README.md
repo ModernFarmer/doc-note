@@ -1,9 +1,11 @@
 <br>
 
-### um-note是基于[prismjs](https://prismjs.com/extending.html)开发的语法高亮vue2组件, 支持编辑和提交
+### doc-note是基于[prismjs](https://prismjs.com/extending.html)开发的语法高亮`vue2`组件, 支持编辑和提交. 
+
+### &diams; `vue3版doc-note` -> 请看[um-note](https://www.npmjs.com/package/um-note)
 <br>
 
-## 完整demo -> **[Demo & Sound Code](https://github.com/ModernFarmer/um-note)**
+## 完整demo -> **[Demo & Sound Code](https://github.com/ModernFarmer/doc-note)**
 <br>
 
 ![](https://pic.imgdb.cn/item/611befad4907e2d39c137f7a.gif)
@@ -14,40 +16,37 @@
 
 \- 下载依赖
 ```javascript
-npm i um-note -S
+npm i doc-note -S
 ```
 <br>
 
 \-&nbsp;&nbsp;&nbsp;注册组件
 ```javascript
 // main.js
-import { UmNote, UmNoteConfig } from 'um-note'
+import { DocNote, DocNoteConfig } from 'doc-note'
 
-// UmNoteConfig是um-note组件的配置方法, 相当于初始化方法, 必须在Vue.use(UmNote)之前执行.
-UmNoteConfig()
+// DocNoteConfig是doc-note组件的配置方法, 相当于初始化方法, 必须在Vue.use(DocNote)之前执行.
+DocNoteConfig()
 
-createApp(App).use(UmNote).mount('#app')
+Vue.use(DocNote)
 ```
-\* [UmNoteConfig 配置](#UmNoteConfig)
+\* [DocNoteConfig 配置](#DocNoteConfig)
 <br>
 
 \-&nbsp;&nbsp;&nbsp;.vue文件中使用
 ```html
 <template>
-  <um-note :codes="code1"/>
+  <doc-note :codes="code"/>
 </template>
 ```
 ```javascript
-import { defineComponent, ref } from 'vue'
-export default defineComponent({
-  setup() {
-    const code = ref(`const helloWord = 'Hello, um-note!'`)
-
-    return {
-      code,
-    }
-  }
-})
+export default {
+  data() {
+    return {
+      code: `const helloWord = 'Hello, um-note!'`
+    }
+  }
+}
 ```
 <br>
 
@@ -70,7 +69,7 @@ export default defineComponent({
 
 |名称|说明|回调参数|回调参数类型|回调参数说明|
 |-|-|-|-|-|
-|submit|组件提交操作时的回调函数. [完整示例demo](https://github.com/ModernFarmer/um-note)|[submitInfo](#submitInfo)|object|当前提交的内容信息和初始化编辑状态方法.|
+|submit|组件提交操作时的回调函数. [完整示例demo](https://github.com/ModernFarmer/doc-note)|[submitInfo](#submitInfo)|object|当前提交的内容信息和初始化编辑状态方法.|
 <br>
 
 ### \-\-\- <a id="codeFormat">codes的格式</a> \-\-\-
@@ -90,27 +89,27 @@ export default defineComponent({
 |close|function|初始化组件的编辑状态为'未编辑'状态.|
 <br>
 
-## \-\- <a id="UmNoteConfig">UmNoteConfig 配置</a> \-\- &nbsp;&nbsp;\[[完整UmNoteConfig示例](#UmNoteConfig-example)\]
+## \-\- <a id="DocNoteConfig">DocNoteConfig 配置</a> \-\- &nbsp;&nbsp;\[[完整DocNoteConfig示例](#DocNoteConfig-example)\]
 
-\- UmNoteConfig&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* *`UmNoteConfig必须在组件挂在之前被调用`*
+\- DocNoteConfig&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* *`DocNoteConfig必须在组件挂在之前被调用`*
 <br>
 
 |名称|类型|功能|回调参数|回调参数类型|回调参数说明|
 |-|-|-|-|-|-|
-|UmNoteConfig|function|配置um-note的主题、支持语言、权限等.|[Configure](#Configure)|object|UmNoteConfig方法的配置对象|
+|DocNoteConfig|function|配置doc-note的主题、支持语言、权限等.|[Configure](#Configure)|object|DocNoteConfig方法的配置对象|
 <br>
 
 ### \-\-\- <a id="Configure">Configure</a> \-\-\-
 
 |Configure的属性|类型|功能|默认值|回调参数|回调参数类型|回调参数说明|
 |-|-|-|-|-|-|-|
-|theme|string|配置um-note的主题. \[[所有主题](#theme)\]. \[[示例](#example-theme)\].|'default'|-|-|-|
-|languages|array|配置um-note支持的语言. \[[所有可被支持的语言](#language)\]. \[[示例](#example-language)\]|['html', 'javascript', 'css']|-|-|-|
-|contentNames|object|配置um-note中删除代码块弹框中的相关文字描述. \[[示例](#contentNames)|undefined|-|-|-|
-|editConfigure|function|配置um-note中的编辑权限. \[[示例](#editConfigure)|undefined|`next`|function|继续下一步.|
-|addConfigure|function|配置um-note中添加代码块权限. \[[示例](#addConfigure)|undefined|`next`|function|继续下一步.|
-|removeConfigure|function|配置um-note中删除代码块权限. \[[示例](#removeConfigure)|undefined|`next`|function|继续下一步.|
-|submitConfigure|function|配置um-note中的提交权限. \[[示例](#submitConfigure)|undefined|`next`|function|继续下一步.|
+|theme|string|配置doc-note的主题. \[[所有主题](#theme)\]. \[[示例](#example-theme)\].|'default'|-|-|-|
+|languages|array|配置doc-note支持的语言. \[[所有可被支持的语言](#language)\]. \[[示例](#example-language)\]|['html', 'javascript', 'css']|-|-|-|
+|contentNames|object|配置doc-note中删除代码块弹框中的相关文字描述. \[[示例](#contentNames)|undefined|-|-|-|
+|editConfigure|function|配置doc-note中的编辑权限. \[[示例](#editConfigure)|undefined|`next`|function|继续下一步.|
+|addConfigure|function|配置doc-note中添加代码块权限. \[[示例](#addConfigure)|undefined|`next`|function|继续下一步.|
+|removeConfigure|function|配置doc-note中删除代码块权限. \[[示例](#removeConfigure)|undefined|`next`|function|继续下一步.|
+|submitConfigure|function|配置doc-note中的提交权限. \[[示例](#submitConfigure)|undefined|`next`|function|继续下一步.|
 <br>
 
 ### $ - 配置示例
@@ -128,7 +127,7 @@ console.log(Prism.allThemes) // ['default', 'coy', 'dark', 'funky', 'okaidia', '
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\- <a id="example-theme">主题配置示例</a>
 
 ```javascript
-UmNoteConfig({
+DocNoteConfig({
   theme: 'okaidia'
 })
 ```
@@ -157,7 +156,7 @@ console.log(Prism.hasLanguage('html')) // true
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\- <a id="example-language">语言配置示例</a>
 
 ```javascript
-UmNoteConfig({
+DocNoteConfig({
   languages: ['html', 'javascript', 'css', 'c++', 'ASP.NET (C#)']
 })
 ```
@@ -170,7 +169,7 @@ UmNoteConfig({
 <br>
 
 ```javascript
-UmNoteConfig({
+DocNoteConfig({
   contentNames: {
     cancel: 'cancel', // 取消按钮展示文本
     confirm: 'done', // 确定按钮展示文本
@@ -187,7 +186,7 @@ UmNoteConfig({
 <br>
 
 ```javascript
-UmNoteConfig({
+DocNoteConfig({
   // 如果不想配置edit权限, 请不要设置editConfigure, 或者在editConfigure内部直接调用next()方法
   editConfigure (next) {
     if (store.getters.isLogin) { // 如果用户已登录
@@ -206,7 +205,7 @@ UmNoteConfig({
 <br>
 
 ```javascript
-UmNoteConfig({
+DocNoteConfig({
   // 如果不想配置add权限, 请不要设置addConfigure, 或者在addConfigure内部直接调用next()方法
   addConfigure (next) {
     if (store.getters.isLogin) { // 如果用户已登录
@@ -225,7 +224,7 @@ UmNoteConfig({
 <br>
 
 ```javascript
-UmNoteConfig({
+DocNoteConfig({
   // 如果不想配置remove权限, 请不要设置removeConfigure, 或者在removeConfigure内部直接调用next()方法
   removeConfigure (next) {
     if (store.getters.isLogin) { // 如果用户已登录
@@ -244,7 +243,7 @@ UmNoteConfig({
 <br>
 
 ```javascript
-UmNoteConfig({
+DocNoteConfig({
   // 如果不想配置submit权限, 请不要设置submitConfigure, 或者在submitConfigure内部直接调用next()方法
   submitConfigure (next) {
     if (store.getters.isLogin) { // 如果用户已登录
@@ -259,11 +258,11 @@ UmNoteConfig({
 ----------
 <br>
 
-### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\- <a id="UmNoteConfig-example">完整UmNoteConfig配置</a>
+### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\- <a id="DocNoteConfig-example">完整DocNoteConfig配置</a>
 <br>
 
 ```javascript
-UmNoteConfig({
+DocNoteConfig({
   /**
    * 权限配置-使页面可被编辑
    * 

@@ -1,5 +1,5 @@
 {
-  "name": "um-note-vue2",
+  "name": "doc-note",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
+    "doc-note": "^1.0.0",
     "prismjs": "1.24.1",
     "vuex": "^3.4.0"
   },
