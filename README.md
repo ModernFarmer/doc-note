@@ -356,7 +356,7 @@ DocNoteConfig({
 ## [中文文档](#chApi) | <a id="enApi">`English Api`</a>
 <br>
 
-## \-\- <a id="chApi">Basic Usage</a> \-\-
+## \-\- Basic Usage \-\-
 <br>
 
 \- Download dependency
