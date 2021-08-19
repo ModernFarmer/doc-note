@@ -10,11 +10,8 @@
 ### &diams; `doc-note for vue3` -> see [um-note](https://www.npmjs.com/package/um-note)
 <br>
 
-<h2 align="center">
-
-<a id="chApi">`中文文档`</a> | [English Api](#enApi)
-
-</h2>
+## <a id="chApi">`中文文档`</a> | [English Api](#enApi)
+<br>
 
 ## 完整demo -> **[Demo & Sound Code](https://github.com/ModernFarmer/doc-note)**
 <br>
@@ -356,11 +353,8 @@ DocNoteConfig({
 ----------
 <br>
 
-<h2 align="center">
-
-[中文文档](#chApi) | <a id="enApi">`English Api`</a>
-
-</h2>
+## [中文文档](#chApi) | <a id="enApi">`English Api`</a>
+<br>
 
 ## \-\- <a id="chApi">Basic Usage</a> \-\-
 <br>
