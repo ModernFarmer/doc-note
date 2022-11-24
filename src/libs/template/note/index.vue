@@ -138,6 +138,8 @@ export default {
       default: true,
     },
   },
+  coreObj: {},
+  codeTagEl: null, // 当添加弹框内的语言数量过多, 可能会导致弹框高度超过代码块高度, codeTagEl用于储存最近一次打开添加弹框的代码块div, 便于关闭弹框时初始化它的高度
   data() {
     let showing = this.foldable === false ? true : (this.unfold || this.unfold === '' ? true : false)
     setTimeout(() => {
@@ -146,7 +148,6 @@ export default {
     return {
       coreObj: {}, // 核心数据对象, 包含codeList数组内代表的每个dom的核心方法(getFrontOffset, getRealDomAndOffset)、根元素(root)、光标所在元素(container)、需要插入的内容(inset)
       canInput: true, // 输入中文时, 在输入过程中且没有确定中文字符时, input也会触发, 这里限制一下绑定在input上面的监听事件 -> 用于this.handleInput()
-      codeTagEl: null, // 当添加弹框内的语言数量过多, 可能会导致弹框高度超过代码块高度, codeTagEl用于储存最近一次打开添加弹框的代码块div, 便于关闭弹框时初始化它的高度
       codeTagHeightOrigin: null, // 未打开弹框时代码块div的原始高度, 用于初始化codeTagEl的高度
       last_lang: 0, // 上一次组件内容横向滚动的距离, 用于固定定位添加删除功能等功能按钮
       codeList: [],
@@ -262,7 +263,7 @@ export default {
         } else {
           throw `The prop 'codes' must be an array or object or a string!`
         }
-        this.coreObj = coreObjJson
+        this.$options.coreObj = coreObjJson
         this.contentChange = false
 
         if (this.showing) {
@@ -320,7 +321,7 @@ export default {
     },
     handleInput(e, item, handleType) {
       if (!selection.haveRange() || !this.canInput || !this.edit) return // 如果窗口中没有Range对象 或 中文输入过程中 或 组件无法编辑状态, 拦截
-      const targetObj = this.coreObj[item.key]
+      const targetObj = this.$options.coreObj[item.key]
       targetObj.container = selection.getEndContainer()
       if (!targetObj.root) targetObj.root = document.querySelector(`#${item.key}`)
       targetObj.inset = ''
@@ -394,9 +395,9 @@ export default {
           const selectEl = document.querySelector(`#${elementKey}_selectBox`)
           const _codeTagEl = document.querySelector(`#${elementKey}_codeBox`)
           if (selectEl.offsetHeight > _codeTagEl.offsetHeight + _codeTagEl.offsetTop - 11) {
-            this.codeTagEl = _codeTagEl
-            this.codeTagHeightOrigin = this.codeTagEl.offsetHeight
-            this.codeTagEl.style.height = `${selectEl.offsetHeight - 3}px`
+            this.$options.codeTagEl = _codeTagEl
+            this.codeTagHeightOrigin = this.$options.codeTagEl.offsetHeight
+            this.$options.codeTagEl.style.height = `${selectEl.offsetHeight - 3}px`
           }
           if (this.height === 'auto') this.setContainerHeight()
         })
@@ -411,7 +412,10 @@ export default {
         code: '',
         processedCode: '',
       })
-      setCore(this.coreObj, key)
+      for (let key in this.$options.coreObj) {
+        this.$options.coreObj[key].root = null
+      }
+      setCore(this.$options.coreObj, key)
       this.contentChange = true
       this.$nextTick(() => {
         if (this.height === 'auto') this.setContainerHeight()
@@ -475,7 +479,10 @@ export default {
     toHandleRemove(val, key, index) {
       if (val === 1) {
         this.codeList.splice(index, 1)
-        Reflect.deleteProperty(this.coreObj, key)
+        Reflect.deleteProperty(this.$options.coreObj, key)
+        for (let key in this.$options.coreObj) {
+          this.$options.coreObj[key].root = null
+        }
         this.contentChange = true
         this.$nextTick(() => {
           this.setContainerHeight()
@@ -490,12 +497,12 @@ export default {
     },
 
     _u_resetStyle() {
-      if (this.codeTagEl) {
-        this.codeTagEl.style.height = `${this.codeTagHeightOrigin}px`
+      if (this.$options.codeTagEl) {
+        this.$options.codeTagEl.style.height = `${this.codeTagHeightOrigin}px`
         if (this.height === 'auto') {
           this.setContainerHeight()
         }
-        this.codeTagEl = null
+        this.$options.codeTagEl = null
         this.codeTagHeightOrigin = null
       }
     },
