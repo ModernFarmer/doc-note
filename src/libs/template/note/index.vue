@@ -145,7 +145,6 @@ export default {
     })
     return {
       coreObj: {}, // 核心数据对象, 包含codeList数组内代表的每个dom的核心方法(getFrontOffset, getRealDomAndOffset)、根元素(root)、光标所在元素(container)、需要插入的内容(inset)
-      isPaste: false, // 是否正在粘贴操作(粘贴的时候也会触发input事件, 这里定义一个状态, 用于阻止粘贴操作后的input事件) -> 用于this.handleInput()
       canInput: true, // 输入中文时, 在输入过程中且没有确定中文字符时, input也会触发, 这里限制一下绑定在input上面的监听事件 -> 用于this.handleInput()
       codeTagEl: null, // 当添加弹框内的语言数量过多, 可能会导致弹框高度超过代码块高度, codeTagEl用于储存最近一次打开添加弹框的代码块div, 便于关闭弹框时初始化它的高度
       codeTagHeightOrigin: null, // 未打开弹框时代码块div的原始高度, 用于初始化codeTagEl的高度
@@ -336,17 +335,13 @@ export default {
         e.preventDefault()
         const clipboard = e.clipboardData || window.clipboardData
         if(clipboard) {
-          this.isPaste = true
           targetObj.container = selection.getStartContainer()
           selection.deleteContents()
-          targetObj.inset = clipboard.getData("text/plain").toString()
+          targetObj.inset = clipboard.getData("text/plain").toString().replace(/\r\n/g, '\n')
         } else {
           alert('Paste is not supported, please enter it manually!')
           return
         }
-      } else if (this.isPaste) { // input事件(粘贴时会触发input事件, 这里要拦截)
-        this.isPaste = false
-        return
       }
 
       targetObj.getFrontOffset(targetObj.root, targetObj.container, targetObj.inset, (totalOffset, textContent) => {

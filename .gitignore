@@ -4,6 +4,7 @@ node_modules
 /dist-doc-note
 /doc-note
 package-lock.json
+yarn.lock
 
 
 # local env files
