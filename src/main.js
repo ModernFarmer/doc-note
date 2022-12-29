@@ -5,6 +5,7 @@ import store from './store'
 Vue.config.productionTip = false
 
 // import { DocNote, DocNoteConfig } from '@/libs' // 开发调试
+// import { DocNote, DocNoteConfig } from '../doc-note/doc-note.umd.min.js' // 本地打包测试
 import { DocNote, DocNoteConfig } from 'doc-note'
 
 /**
